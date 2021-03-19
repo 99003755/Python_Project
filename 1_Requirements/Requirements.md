@@ -16,3 +16,6 @@
 |LL003 |Extracting user defined data|Data defined by user has to be extracted from 5 different spreadsheets and put into one master sheet. |IMPLEMENTED |
 |LL004 |Printing extracted data|Ten different data from each sheet to be printed to the console.|IMPLEMENTED |
 
+
+
+![image](https://user-images.githubusercontent.com/78871106/111773652-75755480-88d4-11eb-91f9-f779cfe183e8.png)
