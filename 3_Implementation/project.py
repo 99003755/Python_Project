@@ -34,7 +34,6 @@ class Excel:
         found1 = 0
         data = []
         for sheet in s_wb.sheetnames:  # traversing through all the sheets
-            print("IN SHEET")
             ws = s_wb[sheet]
             s = ws.max_row  # variable to store max rows for sl num
             col = ws.max_column
@@ -115,4 +114,5 @@ class Excel:
 write = Excel(name, PS, email, path)
 m_data, found = write.data_search()
 write.data_write(m_data, found)
-write.bar()
+if found > 0:
+    write.bar()
