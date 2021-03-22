@@ -8,14 +8,12 @@ from openpyxl import load_workbook
 from openpyxl.styles import Font
 
 path = "D:\Python_Practice\LnT.xlsx"
-wb = load_workbook(path)
 
 # Entering user defined data
 
 name = input("Enter Name: ")
 PS = eval(input("Enter PS Number: "))
 email = input(" Enter email: ")
-
 
 head = []
 
@@ -24,9 +22,9 @@ head = []
 
 class Excel:
 
-    def __init__(self, s_name, s_PS, s_email, s_path):
+    def __init__(self, s_name, s_ps, s_email, s_path):
         self.name = s_name
-        self.PS = s_PS
+        self.PS = s_ps
         self.email = s_email
         self.path = s_path
 
@@ -34,6 +32,7 @@ class Excel:
     def data_search(self):
         s_wb = load_workbook(self.path)
         found1 = 0
+        data = []
         for sheet in s_wb.sheetnames:  # traversing through all the sheets
             print("IN SHEET")
             ws = s_wb[sheet]
@@ -41,10 +40,10 @@ class Excel:
             col = ws.max_column
             for i in range(1, s + 1):
                 if ws.cell(row=i, column=1).value == self.name and ws.cell(row=i, column=2).value == self.PS \
-                        and ws.cell(row=i, column=3).value == self.email: # searching data provided by user
+                        and ws.cell(row=i, column=3).value == self.email:  # searching data provided by user
                     if sheet == "Sheet0":
                         break
-                    if sheet != 'Sheet1': 
+                    if sheet != 'Sheet1':
 
                         for k in range(4, col+1):
                             data.append(ws.cell(row=i, column=k).value)  # appending data to put in master sheet
@@ -66,25 +65,26 @@ class Excel:
         e_found = w_found
         w_wb = load_workbook(self.path)
         if e_found == 1:
-            if 'Sheet0' not in wb.sheetnames:
+            if 'Sheet0' not in w_wb.sheetnames:
                 ws = w_wb.create_sheet('Sheet0')
                 print("CREATING")
                 s = ws.max_row  # variable to store max rows for sl num
                 for i in range(1, len(head)+1):
-                    ws.cell(row=1, column=i).value = head[i - 1]  # Add headings to sheet 
+                    ws.cell(row=1, column=i).value = head[i - 1]  # Add headings to sheet
                 for i in range(1, len(head)+1):
                     clr = ws.cell(row=1, column=i)
                     clr.font = Font(bold=True)  # adding font to headings on the sheet
                 for i in range(1, len(head)+1):
                     ws.cell(row=s + 1, column=i).value = e_data[i - 1]
                 w_wb.save(self.path)
+
             else:
                 # ws = wb.get_sheet_by_name('Sheet0')
-                ws = wb['Sheet0']
+                ws = w_wb['Sheet0']
                 s = ws.max_row
                 for i in range(1, len(head)+1):
                     ws.cell(row=s + 1, column=i).value = e_data[i - 1]
-                w_wb.save(self.path)
+                w_wb.save(path)
         if e_found == 0:
             print("DATA NOT FOUND")
 
@@ -96,8 +96,8 @@ class Excel:
 
         chart1 = BarChart3D()
         # adding title, x-axis and y-axis to the bar chart
-        chart1.title = "EXCEL DATA"  
-        chart1.y_axis.title = 'Marks'  
+        chart1.title = "EXCEL DATA"
+        chart1.y_axis.title = 'Marks'
         chart1.x_axis.title = 'Student'
         bar_r = ws.max_row
         bar_c = ws.max_column
@@ -107,12 +107,12 @@ class Excel:
 
         chart1.add_data(e_data, titles_from_data=True)
         ws.add_chart(chart1, "J15")
-        wb.save(self.path)
+        b_wb.save(self.path)
 
 # Calling functions in the class
 
 
 write = Excel(name, PS, email, path)
-data, found = write.data_search()
-write.data_write(data, found)
+m_data, found = write.data_search()
+write.data_write(m_data, found)
 write.bar()
