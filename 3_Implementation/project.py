@@ -7,7 +7,7 @@ Created on Tue Mar 16 06:25:50 2021
 from openpyxl import load_workbook
 from openpyxl.styles import Font
 
-path = "D:\Python_Practice\LnT.xlsx"
+path = "LnT.xlsx"
 
 # Entering user defined data
 
