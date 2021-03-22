@@ -19,6 +19,3 @@
 |LL005 |Printing extracted data|Creating a Bar Chart for recent data and add it in Master Sheet.|IMPLEMENTED |
 
 
-
-
-![image](https://user-images.githubusercontent.com/78871106/111773652-75755480-88d4-11eb-91f9-f779cfe183e8.png)
